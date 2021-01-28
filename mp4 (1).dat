@@ -1,0 +1,1123 @@
+******Start fetch cycle******
+ st=0 rt='[pc]-> mar'  imar rac=1 rn=3
+ st=1 rt='[[mar]]->mdr' read
+ st=2 rt='[mdr]->ir' omdr iir
+ st=3 rt='[pc]+1->q' rac=1 rn=3 ib p1 oadder
+ st=4 rt='[q]->pc' oq wac=1 wn=3
+       cond='ir1512' value=0 nst=5
+       nst=20
+ st=5 
+       cond='ir118' value=0 nst=10
+***Checking for single operand instructions***
+       cond='ir118' value=1 nst= 111 
+       cond='ir118' value=2 nst= 111
+       cond='ir118' value=3 nst= 111
+       cond='ir118' value=4 nst= 111
+       cond='ir118' value=5 nst= 111
+       cond='ir118' value=6 nst= 111
+       cond='ir118' value=7 nst= 111
+       cond='ir118' value=8 nst= 111
+       cond='ir118' value=10 nst= 111
+ st=10 
+        cond='ir75' value=1 nst= 790
+        cond='ir75' value=4 nst= 11
+	cond='ir75' value=0 nst=15
+	cond='ibrch' value=0 nst=600
+	cond='ibrch' value=1 nst=605
+ st=11  
+  cond='ir4' value=0 nst=805
+  cond='ibrch' value=0 nst=600
+  cond='ibrch' value=1 nst=605
+  
+**halt***
+ st=15 halt
+ 
+ st=16
+	cond='c' value=1 nst=17
+	cond='c' value=0 nst=18
+	nst=0
+ st=17 CLRC
+       nst=0
+ st=18 SETC
+       nst=0
+
+
+**********************************************
+ st=20 
+******************************* source-register
+	cond='ir118' value=0 nst=30
+******************************** source- register indirect
+	cond='ir118' value=1 nst=40
+******************************** source- register autoincrement
+	cond='ir118' value=2 nst=50
+******************************** source- register autodecrement
+	cond='ir118' value=3 nst=60
+******************************** source- register index
+	cond='ir118' value=4 nst=70
+******************************** source- register absolute
+	cond='ir118' value=5 nst=80
+******************************** source- register immediate
+	cond='ir118' value=6 nst=90
+******************************** 
+	cond='ir1512' value=0 nst=10
+	
+	
+	
+******** source- register add. mode*********
+ st=30 rt='[r(ir3:ir2)] ->t2' rac=2 it2
+       nst=110
+******* source - register indirect add.mode****
+ st=40 rt='[r(ir3:ir2)] ->mar' rac=2 imar
+ st=41 rt='[[mar]] ->mdr' read
+ st=42 rt='[mdr]->t2' omdr it2 
+       nst=110
+******* source- Autoincrement add.mode *****
+ st=50 rt='[r(ir3:ir2)] ->mar' rac=2 imar 
+ st=51 rt='[[mar]] ->mdr' read
+ st=52 rt='[mdr]->t2' omdr it2 
+ st=53 rt='[r(ir3:ir2)] ->t1' rac=2 it1 
+ st=54 rt='[t1] + 1 ->q' oa p1 oadder 
+ st=55 rt='[q] ->t3' oq it3 
+ st=56 rt='t3 ->[r(ir3:ir2)]' wac=2 oq 
+       nst=110
+******* source -Autodecrement add.mode*****
+ st=60 rt='[r(ir3:ir2)] ->t1' rac=2 it1 
+ st=61 rt='[t1] -1 ->q' oa comp oadder 
+ st=62 rt='[q] ->t3' oq it3  
+ st=63 rt='[t3] ->mar' ot3 imar 
+ st=64 rt='[[mar]] ->mdr' read
+ st=65 rt='[mdr] ->t2' omdr it2 
+ st=66 rt='t3 ->[r(ir3:ir2)]' ot3 wac=2
+       nst=110
+***** source- index mode ********
+ st=70 rt='[pc]-> mar'  imar rac=1 rn=3 
+ st=71 rt='[[mar]]->mdr' read
+ st=72 rt='[pc]+1->q' rac=1 rn=3 ib p1 oadder
+ st=73 rt='[q]->pc' oq wac=1 wn=3
+ st=74 rt='[mdr] -> t3' omdr it3 
+ st=75 rt='[r(ir3:ir2)]->t1' rac=2 it1 
+ st=76 rt='[t1]+[t3] ->q' oa ot3 ib oadder 
+ st=77 rt='[q] ->mar' oq imar
+ st=78 rt='[[mar]]->mdr' read
+ st=79 rt='[mdr] ->t2' omdr it2
+       nst=110
+
+***** source- absolute ********
+ st=80 rt='[pc]-> mar'  imar rac=1 rn=3 
+ st=81 rt='[[mar]]->mdr' read
+ st=82 rt='[pc]+1->q' rac=1 rn=3 ib p1 oadder
+ st=83 rt='[q]->pc' oq wac=1 wn=3 
+ st=84 rt='[mdr] -> mar' omdr imar 
+ st=85 rt='[[mar]] ->mdr' read
+ st=86 rt='[mdr]->t2' omdr it2 
+           nst=110
+
+****source-immediate *******
+ st=90 rt='[pc]-> mar'  imar rac=1 rn=3 
+ st=91 rt='[[mar]]->mdr' read
+ st=92 rt='[pc]+1->q' rac=1 rn=3 ib p1 oadder
+ st=93 rt='[q]->pc' oq wac=1 wn=3 
+ st=94 rt='[mdr] -> t2' omdr it2
+       nst=110
+ 
+ 
+ 
+
+**************** destination addressing modes******
+ st=110
+	cond='ir1512' value=0 nst=10
+	cond='ir75' value=0 nst=120
+	cond='ir75' value=1 nst=160
+	cond='ir75' value=2 nst=190
+	nst=15
+ st=111
+        cond='ir75' value=0 nst=112
+        cond='ir75' value=1 nst=161
+        cond='ir75' value=2 nst=191
+       
+ st=112
+        cond='ir4' value=0 nst=130
+	cond='ir4' value=1 nst=150	
+***** register and indirect*******
+ st=120
+	cond='ir1512' value=0 nst=10
+	cond='ir4' value=0 nst=130
+	cond='ir4' value=1 nst=150
+	nst=15
+	
+********* destination - register
+ st=130 rt='[r(ir1:ir0)] -> t4' rac=3 it4 
+****Single op****
+       cond='ir1512' value=0 nst=132
+****ADD*****      
+       cond='ir1512' value=1 nst=230
+****SUB*****
+       cond='ir1512' value=2 nst=290
+****OR****
+       cond='ir1512' value=5 nst=351
+****AND****
+       cond='ir1512' value=6 nst=410
+****MOVE****
+	cond='ir1512' value=3 nst=470
+*****EXG****
+	cond='ir1512' value=4 nst=530
+
+       nst=15
+
+
+ st=132
+       cond='ir118' value=1 nst=752
+       cond='ir118' value=2 nst= 650
+       cond='ir118' value=3 nst= 675
+       cond='ir118' value=4 nst= 701
+       cond='ir118' value=5 nst= 725
+       cond='ir118' value=6 nst= 770
+       cond='ir118' value=7 nst= 776
+       cond='ir118' value=8 nst= 744 
+       cond='ir118' value=10 nst= 820
+********* destination -indirect
+ st=150 rt='[r(ir1:ir0)] ->mar' rac=3 imar 
+ st=151 rt='[[mar]] ->mdr' read 
+ st=152 rt='[mdr]->t4' omdr it4 
+****Single op****
+       cond='ir1512' value=0 nst=153
+       
+****ADD****       
+       cond='ir1512' value=1 nst=240
+****SUB****
+       cond='ir1512' value=2 nst=300
+****OR****
+       cond='ir1512' value=5 nst=361
+****AND*****
+       cond='ir1512' value=6 nst=420
+****MOVE****
+	cond='ir1512' value=3 nst=480
+*****EXG****
+	cond='ir1512' value=4 nst=540
+        nst=15
+
+ st=153 
+       cond='ir118' value=1 nst= 754
+       cond='ir118' value=2 nst= 654
+       cond='ir118' value=3 nst= 678
+       cond='ir118' value=4 nst= 704
+       cond='ir118' value=5 nst= 727
+       cond='ir118' value=6 nst= 770
+       cond='ir118' value=7 nst= 776
+       cond='ir118' value=8 nst= 744 
+       cond='ir118' value=10 nst= 820
+*********** dest- increment and decrement
+ st=160 
+	cond='ir1512' value=0 nst=10
+	cond='ir4' value=0 nst=170
+	cond='ir4' value=1 nst=180
+	nst=15
+
+ st=161
+       cond='ir4' value=0 nst=170
+       cond='ir4' value=1 nst=180
+*********** dest-increment
+ st=170 rt='[r(ir1:ir0)] ->mar' rac=3 imar
+ st=171 rt='[[mar]] ->mdr' read
+ st=172 rt='[mdr]->t4' omdr it4 
+****Single op****
+       cond='ir1512' value=0 nst=173
+****ADD**** 	
+       cond='ir1512' value=1 nst=250
+****SUB****
+	cond='ir1512' value=2 nst=310	
+****OR*****
+       cond='ir1512' value=5 nst=371
+****AND****
+       cond='ir1512' value=6 nst=429
+****MOVE****
+	cond='ir1512' value=3 nst=490
+*****EXG****
+	cond='ir1512' value=4 nst=550
+       nst=15
+ st=173
+     
+       cond='ir118' value=1 nst= 756
+       cond='ir118' value=2 nst= 657
+       cond='ir118' value=3 nst= 682
+       cond='ir118' value=4 nst= 706
+       cond='ir118' value=5 nst= 729
+       cond='ir118' value=6 nst= 770
+       cond='ir118' value=7 nst= 776
+       cond='ir118' value=8 nst= 744 
+       cond='ir118' value=10 nst= 820
+
+*********** dest-decrement****
+ st=180 rt='[r(ir1:ir0)]->t1' rac=3 it1 
+ st=181 rt='[t1]+1 ->q' oa comp oadder 
+ st=182 rt='[q] ->t5' oq it5 newz newn
+ st=183 rt='t5 ->[r(ir1:ir0)]' wac=3 oq
+****Single op****
+       cond='ir1512' value=0 nst=184
+****ADD**** 	
+       cond='ir1512' value=1 nst=260
+****SUB****
+	cond='ir1512' value=2 nst=320
+****OR***
+       cond='ir1512' value=5 nst=380
+****AND****
+       cond='ir1512' value=6 nst=440
+****MOVE*****
+	cond='ir1512' value=3 nst=500
+*****EXG*****
+	cond='ir1512' value=4 nst=560
+       nst=15
+
+ st=184
+       cond='ir118' value=1 nst= 758 
+       cond='ir118' value=2 nst= 660
+       cond='ir118' value=3 nst= 685
+       cond='ir118' value=4 nst= 710
+       cond='ir118' value=5 nst= 731
+       cond='ir118' value=6 nst= 770
+       cond='ir118' value=7 nst= 773
+       cond='ir118' value=8 nst= 767
+      cond='ir118' value=10 nst= 815
+******* dest- index and absolute*****
+ st=190
+	cond='ir1512' value=0 nst=10
+	cond='ir4' value=0 nst=200
+	cond='ir4' value=1 nst=210
+	nst=15
+ st=191
+        cond='ir4' value=0 nst=200
+	cond='ir4' value=1 nst=210
+	nst=15
+******dest- index*****
+ st=200 rt='[pc]-> mar'  imar rac=1 rn=3 newz newn
+ st=201 rt='[[mar]]->mdr' read
+ st=202 rt='[pc]+1->q' rac=1 rn=3 ib p1 oadder
+ st=203 rt='[q]->pc' oq wac=1 wn=3
+ st=204 rt='[mdr] -> t3' omdr it3 
+ st=205 rt='[r(ir1:ir0)]->t1' rac=3 it1 
+ st=206 rt='[t1]+[t3] ->q' oa ot3 ib oadder 
+ st=207 rt='[q] ->mar' oq imar 
+ st=208 rt='[[mar]]->mdr' read
+ st=209 rt='[mdr]->t4' omdr it4
+****Single op****
+       cond='ir1512' value=0 nst=218
+****ADD****	
+       cond='ir1512' value=1 nst=270
+****SUB****
+	cond='ir1512' value=2 nst=330
+****OR****
+       cond='ir1512' value=5 nst=391
+****AND****
+       cond='ir1512' value=6 nst=452
+****MOVE****
+	cond='ir1512' value=3 nst=510
+*****EXG****
+	cond='ir1512' value=4 nst=570
+       nst=15
+
+ 
+
+      
+*******dest-absolute****
+ st=210 rt='[pc]-> mar'  imar rac=1 rn=3 
+ st=211 rt='[[mar]]->mdr' read
+ st=212 rt='[pc]+1->q' rac=1 rn=3 ib p1 oadder
+ st=213 rt='[q]->pc' oq wac=1 wn=3 
+ st=214 rt='[mdr] -> mar' omdr imar 
+ st=215 rt='[mdr] ->t5' omdr it5 
+ st=216 rt='[[mar]] ->mdr' read
+ st=217 rt='[mdr]->t4' omdr it4 
+
+****Single op****
+       cond='ir1512' value=0 nst=219
+
+****ADD****        
+       cond='ir1512' value=1 nst=280
+****SUB****
+	cond='ir1512' value=2 nst=340
+****OR****
+       cond='ir1512' value=5 nst=401
+****AND****
+       cond='ir1512' value=6 nst=460
+****MOVE****
+	cond='ir1512' value=3 nst=520
+*****EXG****
+	cond='ir1512' value=4 nst=580
+       nst=15
+
+  st=218 
+       cond='ir118' value=1 nst= 763
+       cond='ir118' value=2 nst= 667
+       cond='ir118' value=3 nst= 692
+       cond='ir118' value=4 nst= 718
+       cond='ir118' value=5 nst= 736
+       cond='ir118' value=6 nst= 770
+       cond='ir118' value=7 nst= 776
+       cond='ir118' value=8 nst= 744
+      cond='ir118' value=10 nst= 820
+ st=219
+       cond='ir118' value=1 nst= 765
+       cond='ir118' value=2 nst= 670
+       cond='ir118' value=3 nst= 695
+       cond='ir118' value=4 nst= 721
+       cond='ir118' value=5 nst= 738
+       cond='ir118' value=6 nst= 770
+       cond='ir118' value=7 nst= 776
+       cond='ir118' value=8 nst= 744
+      cond='ir118' value=10 nst= 820
+*******************ADD INSTRUCTION*******************
+
+******* add -dst register*********************************
+ st=230 rt='[t2] ->t1' ot2 it1 
+ st=231 rt='[t1]+[t4] ->q' ot4 ib oa oadder newc newv
+ st=232 rt='[q] -> [r(ir1:ir0)]' oq wac=3 newz newn
+        nst=0
+*********add -dst indirect***********
+ st=240 rt='[t2] ->t1' ot2 it1 
+ st=241 rt='[t1]+[t4] ->q' ot4 ib oa oadder newc newv 
+ st=242 rt='[q]->mdr' oq imdr newz newn
+ st=243 rt='[r(ir1:ir0)] -> mar' rac=3 imar
+ st=244 rt='[mdr] ->[mar]' write
+	nst=0
+*********** add -dst increment
+ st=250 rt='[t2] ->t1' ot2 it1 
+ st=251 rt='[t1]+[t4] ->q' ot4 ib oa oadder newc newv 
+ st=252 rt='[q]->mdr' oq imdr newz newn
+ st=253 rt='[r(ir1:ir0) ->mar' rac=3 imar 
+ st=254 rt='[mdr] ->[mar]' write
+ st=255 rt='[r(ir1:ir0) ->t1' rac=3 it1 
+ st=256 rt='[t1]+1 ->q' oa p1 oadder 
+ st=257 rt='[q] -> [r(ir1:ir0)]' oq wac=3 newz newn 
+ 	nst=0
+*********** add- dst decrement
+ st=260 rt='[t5] ->mar' ot5 imar 
+ st=261 rt='[[mar]] ->mdr' read
+ st=262 rt='[mdr] -> t4' omdr it4 
+ st=263 rt='[t2] ->t1' ot2 it1 
+ st=264 rt='[t1]+[t4] ->q' ot4 ib oa oadder newc newv
+ st=265 rt='[q]->mdr' oq imdr newz newn
+ st=266 rt='[t5] ->mar' ot5 imar 
+ st=267 rt='[mdr] ->[mar]' write
+ 	nst=0
+*************add - dst index
+ st=270 rt='[t2] ->t1' ot2 it1 
+ st=271 rt='[t1]+[t4] ->q' ot4 ib oa oadder newc newv 
+ st=272 rt='[q] ->mdr' oq imdr newz newn
+ st=273 rt='[mdr] ->[mar]' write
+	nst=0
+
+******** add-dst absolute
+ st=280 rt='[t2] ->t1' ot2 it1  
+ st=281 rt='[t1]+[t4] ->q' ot4 ib oa oadder newc newv 
+ st=282 rt='[t5]->mar' ot5 imar 
+ st=283 rt='[q] ->mdr' oq imdr newz newn
+ st=284 rt='[mdr] ->[mar]' write
+	nst=0
+
+
+
+********************SUB INSTRUCTION************************************
+
+************sub-dst register
+ st=290 rt='[t4] ->t1' ot4 it1
+ st=291 rt='[t1]-[t2]->q' ot2 ib comp oa p1 oadder newc newv
+ st=292 rt='[q] -> [r(ir1:ir0)]' oq wac=3 newz newn
+ 	nst=16
+***********sub -dst indirect
+ st=300 rt='[t4] ->t1' ot4 it1 
+ st=301 rt='[t1]+[t2] ->q' ot2 ib comp p1 oa oadder newc newv 
+ st=302 rt='[q]->mdr' oq imdr newz newn
+ st=303 rt='[r(ir1:ir0)] -> mar' rac=3 imar
+ st=304 rt='[mdr] ->[mar]' write
+        nst=16
+**********sub- dst increment0091
+ st=310 rt='[t4] ->t1' ot4 it1 
+ st=311 rt='[t1]+[t2] ->q' ot2 ib comp p1 oa oadder newc newv 
+ st=312 rt='[q]->mdr' oq imdr newz newn
+ st=313 rt='[r(ir1:ir0) ->mar' rac=3 imar 
+ st=314 rt='[mdr] ->[mar]' write
+ st=315 rt='[r(ir1:ir0) ->t1' rac=3 it1 
+ st=316 rt='[t1]+1 ->q' oa p1 oadder 
+ st=317 rt='[q] -> [r(ir1:ir0)]' oq wac=3 newz newn newz newn
+        nst=16
+*********sub- dst decrement
+ st=320 rt='[t5] ->mar' ot5 imar 
+ st=321 rt='[[mar]] ->mdr' read
+ st=322 rt='[mdr] -> t4' omdr it4 
+ st=323 rt='[t4] ->t1' ot4 it1 
+ st=324 rt='[t1]+[t2] ->q' ot2 ib comp p1 oa oadder newc newv
+ st=325 rt='[q]->mdr' oq imdr newz newn
+ st=326 rt='[t5] ->mar' ot5 imar 
+ st=327 rt='[mdr] ->[mar]' write
+        nst=16
+
+********sub -dst index
+ st=330 rt='[t4] ->t1' ot4 it1 
+ st=331 rt='[t1]+[t2] ->q' ot2 ib comp p1 oa oadder newc newv 
+ st=332 rt='[q] ->mdr' oq imdr newz newn
+ st=333 rt='[mdr] ->[mar]' write
+	nst=16
+*******sub-absolute
+ 
+ st=340 rt='[t4] ->t1' ot4 it1  
+ st=341 rt='[t1]+[t2] ->q' ot2 ib oa oadder newc newv 
+ st=342 rt='[t5]->mar' ot5 imar 
+ st=343 rt='[q] ->mdr' oq imdr newz newn
+ st=344 rt='[mdr] ->[mar]' write
+        nst=16
+
+
+************OR INSTRUCTIONS************
+
+******or- dst register************
+ st=351 rt='[t2] OR [t4] ->q' ot2 ot4 ib oadder clrc clrv
+ st=352 rt='[q] -> [r(ir1:ir0)]' oq wac=3 newz newn
+        nst=0
+******or -dst indirect************
+
+ st=361 rt='[t2] or [t4] ->q' ot2 ot4 ib oadder clrc clrv
+ st=362 rt='[q]->mdr' oq imdr newz newn
+ st=363 rt='[r(ir1:ir0)] -> mar' rac=3 imar
+ st=364 rt='[mdr] ->[mar]' write
+	nst=0
+*********** or -dst increment************
+
+ st=371 rt='[t2] or [t4] ->q' ot2 ot4 ib oadder clrc clrv
+ st=372 rt='[q]->mdr' oq imdr newz newn
+ st=373 rt='[r(ir1:ir0) ->mar' rac=3 imar 
+ st=374 rt='[mdr] ->[mar]' write
+ st=375 rt='[r(ir1:ir0) ->t1' rac=3 it1 
+ st=376 rt='[t1]+1 ->q' oa p1 oadder 
+ st=377 rt='[q] -> [r(ir1:ir0)]' oq wac=3 newz newn 
+ 	nst=0
+********* or -dst decrement************
+ st=380 rt='[t5] ->mar' ot5 imar 
+ st=381 rt='[[mar]] ->mdr' read
+ st=382 rt='[mdr] -> t4' omdr it4 
+ st=383 rt='[t2] or [t4] ->q' ot2 ot4 ib oadder clrc clrv
+ st=384 rt='[q]->mdr' oq imdr newz newn
+ st=385 rt='[t5] ->mar' ot5 imar 
+ st=386 rt='[mdr] ->[mar]' write
+ 	nst=0
+******* or -dst index************
+
+ st=391 rt='[t2] or [t4] ->q' ot2 ot4 ib oadder clrc clrv 
+ st=392 rt='[q] ->mdr' oq imdr newz newn
+ st=393 rt='[mdr] ->[mar]' write
+	nst=0
+******** or- dst absolute************
+ st=401 rt='[t2] or [t4] ->q' ot2 ot4 ib oadder clrc clrv
+ st=402 rt='[t5]->mar' ot5 imar 
+ st=403 rt='[q] ->mdr' oq imdr newz newn
+ st=404 rt='[mdr] ->[mar]' write
+	nst=0
+
+
+
+
+******************AND INSTRUCTIONS************
+
+
+******and- dst register************
+ st=410 rt='[t2] ->q' ot2 ib comp oadder
+ st=411 rt='[q] ->t2' oq it2
+ st=412 rt='[t4] ->q' ot4 ib comp oadder
+ st=413 rt='[q] ->t4' oq it4 
+ st=414 rt='[t2] or [t4] ->q' ot2 ot4 ib oadder clrc clrv
+ st=415 rt='[q] -> q' oq ib comp oadder 
+ st=416 rt='[q] ->[R(IR1:IR0)]' oq wac=3 newz newn
+ 
+        nst=0
+******and -dst indirect************
+ st=420 rt='[t2] ->q' ot2 ib comp oadder
+ st=421 rt='[q] ->t2' oq it2
+ st=422 rt='[t4] ->q' ot4 ib comp oadder
+ st=423 rt='[q] ->t4' oq it4 
+ st=424 rt='[t2] or [t4] ->q' ot2 ot4 ib oadder clrc clrv
+ st=425 rt='[q] -> q' oq ib comp oadder 
+ st=426 rt='[q]->mdr' oq imdr newz newn
+ st=427 rt='[r(ir1:ir0)] -> mar' rac=3 imar
+ st=428 rt='[mdr] ->[mar]' write
+	nst=0
+*********** and -dst increment************
+ st=429 rt='[t2] ->q' ot2 ib comp oadder
+ st=430 rt='[q] ->t2' oq it2
+ st=431 rt='[t4] ->q' ot4 ib comp oadder
+ st=432 rt='[q] ->t4' oq it4 
+ st=433 rt='[t2] or [t4] ->q' ot2 ot4 ib oadder clrc clrv
+ st=434 rt='[q] -> q' oq ib comp oadder 
+ st=435 rt='[q]->mdr' oq imdr newz newn 
+ st=436 rt='[mdr] ->[mar]' write
+ st=437 rt='[r(ir1:ir0) ->t1' rac=3 it1 
+ st=438 rt='[t1]+1 ->q' oa p1 oadder 
+ st=439 rt='[q] -> [r(ir1:ir0)]' oq wac=3 newz newn 
+ 	nst=0
+********* and -dst decrement************
+ st=440 rt='[t5] ->mar' ot5 imar 
+ st=441 rt='[[mar]] ->mdr' read
+ st=442 rt='[mdr] -> t4' omdr it4 
+ st=443 rt='[t2] ->q' ot2 ib comp oadder
+ st=444 rt='[q] ->t2' oq it2
+ st=445 rt='[t4] ->q' ot4 ib comp oadder
+ st=446 rt='[q] ->t4' oq it4 
+ st=447 rt='[t2] or [t4] ->q' ot2 ot4 ib oadder clrc clrv
+ st=448 rt='[q] -> q' oq ib comp oadder 
+ st=449 rt='[q]->mdr' oq imdr newz newn
+ st=450 rt='[t5] ->mar' ot5 imar 
+ st=451 rt='[mdr] ->[mar]' write
+ 	nst=0
+******* and -dst index************
+ st=452 rt='[t2] ->q' ot2 ib comp oadder
+ st=453 rt='[q] ->t2' oq it2
+ st=454 rt='[t4] ->q' ot4 ib comp oadder
+ st=455 rt='[q] ->t4' oq it4 
+ st=456 rt='[t2] or [t4] ->q' ot2 ot4 ib oadder clrc clrv
+ st=457 rt='[q] -> q' oq ib comp oadder 
+ st=458 rt='[q] ->mdr' oq imdr newz newn
+ st=459 rt='[mdr] ->[mar]' write
+	nst=0
+******** and- dst absolute************
+ st=460 rt='[t2] ->q' ot2 ib comp oadder
+ st=461 rt='[q] ->t2' oq it2
+ st=462 rt='[t4] ->q' ot4 ib comp oadder
+ st=463 rt='[q] ->t4' oq it4 
+ st=464 rt='[t2] or [t4] ->q' ot2 ot4 ib oadder clrc clrv
+ st=465 rt='[q] -> q' oq ib comp oadder 
+ st=466 rt='[t5]->mar' ot5 imar 
+ st=467 rt='[q] ->mdr' oq imdr newz newn
+ st=468 rt='[mdr] ->[mar]' write
+	nst=0
+
+
+*************MOVE INSTRUCTIONS************
+
+******* MOVE -dst register*********************************
+ st=470 rt='[t2] ->[t1]' ot2 it1
+ st=471 rt='[t1] ->q'    oa oadder clrc clrv
+ st=472 rt='q ->[r(ir1:ir0)]'    oq wac=3 newz newn
+        nst=0
+
+*********MOVE -dst indirect***********
+ st=480 rt='[t2] ->[t1]' ot2 it1
+ st=481 rt='[t1] ->q'    oa oadder clrc clrv
+ st=482 rt='[q]-> mdr' oq imdr newz newn
+ st=483 rt='[mdr] ->[mar]' write
+	nst=0
+
+*********** MOVE -dst increment************
+ st=490 rt='[t2] ->[t1]' ot2 it1
+ st=491 rt='[t1] ->q'    oa oadder clrc clrv
+ st=492 rt='[q]-> mdr' oq imdr newz newn
+ st=493 rt='[mdr] ->[mar]' write
+ st=494 rt='[r(ir1:ir0)] ->t1' rac=3 it1 
+ st=495 rt='[t1]+1 ->q' oa p1 oadder 
+ st=496 rt='[q] -> [r(ir1:ir0)]' oq wac=3 
+ 	nst=0
+
+*********** MOVE - dst decrement************
+ st=500 rt='[r(ir1:ir0)] ->mar' rac =3 imar 
+ 	nst=480
+
+*************MOVE - dst index************
+ st=510 rt='[t2] ->[t1]' ot2 it1
+ st=511 rt='[t1] ->q'    oa oadder clrc clrv
+ st=512 rt='[q]-> mdr' oq imdr newz newn
+ st=513 rt='[mdr] ->[mar]' write
+	nst=0
+
+******** MOVE-absolute************
+ st=520 rt='[t2] ->[t1]' ot2 it1
+ st=521 rt='[t1] ->q'    oa oadder clrc clrv
+ st=522 rt='[q]-> mdr' oq imdr newz newn
+ st=523 rt='[mdr] ->[mar]' write
+	nst=0
+
+******* EXCHANGE************
+******* EXCHANGE -dst register*********************************
+ st=530 rt='[t4] -> mdr' ot4 imdr
+ st=531 rt='[t2] -> [r(ir1:ir0)]' ot2 wac=3
+
+******************************* source-register
+	cond='ir118' value=0 nst=620
+******************************** source- register indirect
+	cond='ir118' value=1 nst=625
+******************************** source- register autoincrement
+	cond='ir118' value=2 nst=625
+******************************** source- register autodecrement
+	cond='ir118' value=3 nst=625
+******************************** source- register index
+	cond='ir118' value=4 nst=625
+******************************** source- register absolute
+	cond='ir118' value=5 nst=625
+        nst=0
+
+*********EXCHANGE -dst indirect***********
+ st=540 rt='[t2]-> mdr' ot2 imdr
+ st=541 rt='[t4] ->[r(ir3:ir2)]' ot4 wac = 2
+ st=542 rt='[mdr] ->[mar]' write
+	nst=0
+
+*********** EXCHANGE -dst increment************
+ st=550 rt='[t2]-> mdr' ot2 imdr
+ st=551 rt='[t4] ->[r(ir3:ir2)]' ot4 wac = 2
+ st=552 rt='[mdr] ->[mar]' write
+ st=553 rt='[r(ir1:ir0)] ->t1' rac=3 it1 
+ st=554 rt='[t1]+1 ->q' oa p1 oadder 
+ st=555 rt='[q] -> [r(ir1:ir0)]' oq wac=3 
+ 	nst=0
+
+*********** EXCHANGE - dst decrement************
+ st=560 rt='[r(ir1:ir0)] ->mar' rac =3 imar 
+ st=561 rt='[[mar]]->mdr' read
+ st=562 rt='[mdr]->t4' omdr it4
+ 	nst=540
+
+*************EXCHANGE - dst index************
+ st=570 rt='[t2]-> mdr' ot2 imdr
+ st=571 rt='[t4] ->[r(ir3:ir2)]' ot4 wac = 2
+ st=572 rt='[mdr] ->[mar]' write
+	nst=0
+
+
+******** EXCHANGE-absolute************
+ st=580 rt='[t2]-> mdr' ot2 imdr
+ st=581 rt='[t4] ->[r(ir3:ir2)]' ot4 wac = 2
+ st=582 rt='[mdr] ->[mar]' write
+	nst=0
+
+**********************BRANCH************
+ st=600
+	cond='ir5' value=1 nst=610
+ st=601 rt='[pc] ->t1' it1 rac=1 rn=3
+ st=602 rt='[t1]+1->q' oa p1 oadder
+ st=603 rt='[q] -> pc' oq wac=1 wn=3 
+	nst=0
+ st=605
+	cond='ir5' value=0 nst=610
+	nst=0
+
+ st=610 rt='[pc] ->t1' it1 rac=1 rn=3
+ st=611 rt='[t1]+1->q' oa p1 oadder 
+ st=612 rt='[q] ->t5' oq it5
+ st=613 rt='[pc]-> mar'  imar rac=1 rn=3 
+ st=614 rt='[[mar]]->mdr' read
+ st=615 rt='[mdr] ->t3' omdr it3
+ st=616 rt='[t5] ->t1' ot5 it1
+ st=617 rt='[t1]+[t3]->q' ot3 ib oa oadder
+ st=618 rt='[q] ->pc' oq wac=1 wn=3
+ 	nst=0
+ 
+*************************************Source exchange register****************
+
+ st=620 rt = 'mdr -> [r(ir3:ir2)]' omdr wac = 2
+ nst=0
+
+*************************************Source exchange indirect_register****************
+ st=625 rt='[mdr] ->[mar]' write
+ nst=0
+
+
+***Single Operand***
+
+
+***INCREMENT - dst register***
+******* inc -dst register*********************************
+ st=650 rt='[t4]->t1'    ot4 it1
+ st=651 rt='[t1]+1 ->q'  oa p1 oadder newc newv
+ 
+        nst=232
+*********inc -dst indirect***********
+ st=654 rt='[t4]->t1'    ot4 it1
+ st=655 rt='[t1]+1 ->q'  oa p1 oadder newc newv
+       
+	nst=242
+*********** inc -dst increment
+ st=657 rt='[t4]->t1'    ot4 it1
+ st=658 rt='[t1]+1 ->q'  oa p1 oadder newc newv
+ 
+ 	nst=252
+*********** inc- dst decrement
+ st=660 rt='[t5] ->mar' ot5 imar 
+ st=661 rt='[[mar]] ->mdr' read
+ st=662 rt='[mdr] -> t4' omdr it4 
+ st=663 rt='[t4]->t1'    ot4 it1
+ st=664 rt='[t1]+1 ->q'  oa p1 oadder newc newv
+ 
+ 	nst=265
+*************inc - dst index
+ st=667 rt='[t4]->t1'    ot4 it1
+ st=668 rt='[t1]+1 ->q'  oa p1 oadder newc newv
+ 
+	nst=272
+
+******** inc-dst absolute
+ st=670 rt='[t4]->t1'   ot4 it1
+ st=671 rt='[t1]+1 ->q'  oa p1 oadder newc newv
+
+	nst=282
+
+***DECREMENT - dst register***
+******* dec -dst register*********************************
+ st=675 rt='[t4]->t1'   ot4 it1
+ st=676 rt='[t1]+1 ->q'  oa comp oadder newc newv
+ 
+        nst=232
+*********dec -dst indirect***********
+ st=678 rt='[t4]->t1'    ot4 it1
+ st=679 rt='[t1]+1 ->q'  oa comp oadder newc newv
+       
+	nst=242
+*********** dec -dst increment
+ st=682 rt='[t4]->t1'    ot4 it1
+ st=683 rt='[t1]+1 ->q'  oa  comp oadder newc newv
+ 
+ 	nst=252
+*********** dec- dst decrement
+ st=685 rt='[t5] ->mar' ot5 imar 
+ st=686 rt='[[mar]] ->mdr' read
+ st=687 rt='[mdr] -> t4' omdr it4 
+ st=688 rt='[t4]->t1'    ot4 it1
+ st=689 rt='[t1]+1 ->q'  oa comp oadder newc newv
+ 
+ 	nst=265
+*************dec - dst index
+ st=692 rt='[t4]->t1'    ot4 it1
+ st=693 rt='[t1]+1 ->q'  oa comp oadder newc newv
+ 
+	nst=272
+
+******** dec-dst absolute
+ st=695 rt='[t4]->t1'    ot4 it1
+ st=696 rt='[t1]+1 ->q'  oa comp oadder newc newv
+
+	nst=282
+
+***NEGATE - dst register***
+******* Neg -dst register*********************************
+ 
+ st=701 rt='[t4] ->q'  ot4 ib comp p1 oadder newc newv
+ 
+        nst=232
+*********Neg -dst indirect***********
+  st=704 rt='[t4] ->q'  ot4 ib comp p1 oadder newc newv
+       
+	nst=242
+*********** Neg -dst increment
+  st=706 rt='[t4] ->q'  ot4 ib comp p1 oadder newc newv
+ 
+ 	nst=252
+*********** Neg- dst decrement
+ st=710 rt='[t5] ->mar' ot5 imar 
+ st=711 rt='[[mar]] ->mdr' read
+ st=712 rt='[mdr] -> t4' omdr it4 
+ st=713 rt='[t4] ->q'  ot4 ib comp p1 oadder newc newv
+ 	nst=265
+*************Neg - dst index
+  st=718 rt='[t4] ->q'  ot4 ib comp p1 oadder newc newv
+ 
+	nst=272
+
+******** Neg-dst absolute
+  st=721 rt='[t4] ->q'  ot4 ib comp p1 oadder newc newv
+	nst=282
+
+
+***COMPLEMENT - dst register***
+******* Neg -dst register*********************************
+ 
+ st=725 rt='[t4] ->q'  ot4 ib comp oadder clrc clrv
+ 
+        nst=232
+********Comp -dst indirect***********
+  st=727 rt='[t4] ->q'  ot4 ib comp oadder clrc clrv
+       
+	nst=242
+*********** Comp -dst increment
+  st=729 rt='[t4] ->q'  ot4 ib comp oadder clrc clrv
+ 
+ 	nst=252
+*********** Comp- dst decrement
+ st=731 rt='[t5] ->mar' ot5 imar 
+ st=732 rt='[[mar]] ->mdr' read
+ st=733 rt='[mdr] -> t4' omdr it4 
+ st=734 rt='[t4] ->q'  ot4 ib comp oadder clrc clrv
+ 	nst=265
+*************Comp - dst index
+  st=736 rt='[t4] ->q'  ot4 ib comp oadder clrc clrv
+ 
+	 nst=272
+
+******** Comp-dst absolute
+  st=738 rt='[t4] ->q'  ot4 ib comp oadder clrc clrv
+	 nst=282
+
+*******TST*******
+  st=739 rt='[t5] ->mar' ot5 imar 
+  st=740 rt='[[mar]] ->mdr' read
+  st=741 rt='[mdr] -> t4' omdr it4 
+         nst=747
+
+
+
+  st=744 rt='[t1] ->t3'      ot1 it3
+  st=745 rt='[t1]+[t3] ->q'  oa ot3 ib comp p1 oadder newc newv
+  st=746 rt='[q] ->t3'       oq it3
+  st=747 rt='[t4] ->t1'      ot4 it1
+  st=748 rt='[t1]+[t3] ->q'  oa ot3 ib comp p1 oadder clrc clrv 
+  st=749 rt='[q] ->t4'       oq  it4 newn newz
+  st=750 
+         cond='ir75' value=1 nst=751
+         nst=0
+  st=751
+         cond='ir4' value=0 nst=910
+         cond='ir4' value=1 nst=0
+
+***CLR - dst register***
+******* Clr -dst register*********************************
+ 
+ st=752 rt='[t1] ->t3'      ot1 it3
+ st=753 rt='[t1]+[t3] ->q'  oa ot3 ib comp p1 oadder clrc clrv
+ 
+        nst=232
+********Clr -dst indirect***********
+  st=754 rt='[t1] ->t3'      ot1 it3
+  st=755 rt='[t1]+[t3] ->q'  oa ot3 ib comp p1 oadder clrc clrv
+       
+	nst=242
+*********** Clr -dst increment
+  st=756 rt='[t1] ->t3'      ot1 it3
+  st=757 rt='[t1]+[t3] ->q'  oa ot3 ib comp p1 oadder clrc clrv
+ 	nst=252
+*********** Clr- dst decrement
+ st=758 rt='[t5] ->mar' ot5 imar 
+ st=759 rt='[[mar]] ->mdr' read
+ st=760 rt='[mdr] -> t4' omdr it4 
+ st=761 rt='[t1] ->t3'      ot1 it3
+ st=762 rt='[t1]+[t3] ->q'  oa ot3 ib comp p1 oadder clrc clrv 
+
+ 	nst=265
+*************Clr - dst index
+ st=763 rt='[t1] ->t3'      ot1 it3
+  st=764 rt='[t1]+[t3] ->q'  oa ot3 ib comp p1 oadder clrc clrv
+ 
+	 nst=272
+
+******** Clr-dst absolute
+  st=765 rt='[t1] ->t3'      ot1 it3
+  st=766 rt='[t1]+[t3] ->q'  oa ot3 ib comp p1 oadder clrc clrv
+	 nst=282
+***********JMP***********
+  st=767 rt='[t5] ->mar' ot5 imar 
+  st=768 rt='[[mar]] ->mdr' read
+  st=769 rt='[mdr] -> t4' omdr it4 
+
+
+  st=770 rt='t4-> pc'     ot4 wac=1 wn= 3
+  st=771  
+        cond='ir75' value=1 nst=772
+          nst=0
+   st=772 
+        cond='ir4' value=0 nst=252
+        cond='ir4' value=1 nst=0
+
+*************JSR*************
+
+  st=773 rt='[t5] ->mar' ot5 imar 
+  st=774 rt='[[mar]] ->mdr' read
+  st=775 rt='[mdr] -> t4' omdr it4 
+
+
+
+  st=776 rt='[SP]-> t1'     rac=1 rn=2 it1
+  st=777 rt='[t1]+1 -> q'   oa comp oadder newc newv
+  st=778 rt='[q]->t1'       oq it1
+  st=779 rt='[t1]->sp'      ot1 wac=1 wn=2 
+  st=780 rt='[SP]->mar'    rac=1 rn=2 imar
+  st=781 rt='[PC]->mdr'    rac=1 rn=3 imdr 
+  st=782 rt='[mdr] ->[mar]' write
+  st=783 rt='[t4]-> pc'    ot4 wac=1 wn= 3
+  st=784  
+        cond='ir75' value=1 nst=785
+          nst=0
+  st=785 
+        cond='ir4' value=0 nst=252
+        cond='ir4' value=1 nst=0
+
+         nst=0
+***********SET/CLEAR **********
+  
+  st=790 
+         cond='ir4' value=0 nst=791
+         cond='ir4' value=1 nst=792
+         nst=15
+  st=791
+          cond='ir0' value=1 nst=793
+          cond='ir1' value=1 nst=890
+          cond='ir2' value=1 nst=797
+          cond='ir3' value=1 nst=798
+          nst=15
+  st=792
+          cond='ir0' value=1 nst=896
+          cond='ir1' value=1 nst=800
+          cond='ir2' value=1 nst=803
+          cond='ir3' value=1 nst=804
+          nst=15
+ st=793  rt='[t1] ->t3'      ot1 it3
+ st=794  rt='[t1]+[t3] ->q'  oa ot3 ib comp p1 oadder     
+ st=795  rt='q-> t4'           oq it4 newn
+         nst=0
+         
+          
+ st=797   CLRV
+          nst = 0
+ st=798  CLRC
+         nst=0
+ 
+ st=800   rt='[t1] ->t3'      ot1 it3
+ st=801   rt='[t1]+[t3] ->q'  oa ot3 ib comp p1 oadder     
+ st=802   rt='q-> t4'           oq it4 newz
+          nst=0
+          
+ st=803   SETV
+          nst=0
+ st=804   SETC 
+           nst=0
+
+
+
+****RTS******
+  st=805 rt='[SP] -> mar'     rac=1 rn=2 imar
+  st=806 rt='[[mar]] ->mdr'   read
+  st=807 rt='[mdr] -> mar'    write
+  st=808 rt='[[mar]] -> mdr'  read
+  st=809 rt='[mdr] -> pc'     omdr wac=1 wn=3
+  st=810 rt='[sp]->t1'        rac=1 rn=2 it1
+  st=811 rt='[t1] + 1 ->q'     oa p1 oadder
+  st=812 rt='[q] ->SP'        oq wac=1 wn=2
+         nst=0
+
+******DBRA******
+
+  st=815 rt='[t5] ->mar' ot5 imar 
+  st=816 rt='[[mar]] ->mdr' read
+  st=817 rt='[mdr] -> t4' omdr it4 
+         nst=820
+      
+  st=820 rt='[t4]-> t1'  ot4 it1
+  st=821 rt='[t1]+1 -> q'   oa comp oadder newc newv 
+  st=822 rt='[q]->t4'       oq it4
+
+   st=823 rt='[t4]->q'    ot4 iq
+ st=824 
+        cond='ir75' value=0 nst=825
+        cond='ir75' value=1 nst=826
+        cond='ir75' value=2 nst=827
+        nst=0    
+ st=825 
+       cond='ir4' value=0 nst=920
+       cond='ir4' value=1 nst=921
+       nst=0	
+ st=826 
+       cond='ir4' value=0 nst=924
+       cond='ir4' value=1 nst=930 
+       nst=0
+ st=827 
+       cond='ir4' value=0 nst=933
+       cond='ir4' value=1 nst=935
+       nst=0
+ 
+
+ st=828 rt='[t1]->ir'    ot1 iir
+ st=829 
+       cond='ir0' value=0 nst=830
+       nst = 850
+ st=830 
+       cond='ir1' value=0 nst=831
+       nst = 850
+ st=831 
+       cond='ir2' value=0 nst=832
+       nst = 850
+ st=832 
+       cond='ir3' value=0 nst=833
+       nst = 850
+ st=833 
+       cond='ir64' value=0 nst=834
+       nst = 850
+ st=834 
+       cond='ir7' value=0 nst=835
+       nst = 850
+ st=835 
+       cond='ir108' value=0 nst=836
+       nst = 850
+ st=836 
+       cond='ir11' value=0  nst=837
+       nst = 850
+ st=837 
+       cond='ir1512' value=0  nst=0
+       nst = 850
+
+
+
+ st=850 rt='[pc]-> mar'  imar rac=1 rn=3 
+ st=851 rt='[[mar]]->mdr' read
+ st=852 rt='[pc]+1->q' rac=1 rn=3 ib p1 oadder
+ st=853 rt='[q]->pc' oq wac=1 wn=3
+ st=854 rt='[mdr]-> t5'  omdr it5
+ st=855 rt='[PC]-> t1'   rac=1 rn=3 it1
+ st=856 rt='[t1]+[t5]->q'oa ot5 ib  oadder 
+ st=857 rt='[q]-> pc'    oq wac=1 wn= 3  
+        nst=0
+
+      
+
+
+****clear z***
+ st=890  rt='[t1] ->t3'      ot1 it3
+ st=891  rt='[t1]+[t3] ->q'  oa ot3 ib comp p1 oadder     
+ st=892  rt='[q]-> t4'           oq it4 
+ st=893  rt='[t4]-> t1'        ot4 it1 
+ st=894  rt='[t1]+1->q'       oa comp oadder 
+ st=895  rt='[q]->t4'        oq it4 newz 
+         nst=0
+***set n***
+ st=896  rt='[t1] ->t3'      ot1 it3
+ st=897  rt='[t1]+[t3] ->q'  oa ot3 ib comp p1 oadder     
+ st=898  rt='[q]-> t4'           oq it4 
+ st=899  rt='[t4]-> t1'        ot4 it1 
+ st=900  rt='[t1]+1->q'       oa comp oadder 
+ st=901  rt='[q]->t4'        oq it4 newn 
+         nst=0
+****test: no memory update***
+ st=910 rt='[q]->mdr' oq imdr newz newn
+***FOR DBRA***
+
+**REG**
+ st=920 rt='[q] -> [r(ir1:ir0)]' oq wac=3 newz newn
+        nst=828
+***INDIRECT 
+ st=921 rt='[q]->mdr' oq imdr newz newn
+ st=922 rt='[r(ir1:ir0)] -> mar' rac=3 imar
+ st=923 rt='[mdr] ->[mar]' write
+	nst=828
+**INCREMENT****
+ st=924 rt='[q]->mdr' oq imdr newz newn
+ st=925 rt='[r(ir1:ir0) ->mar' rac=3 imar 
+ st=926 rt='[mdr] ->[mar]' write
+ st=927 rt='[r(ir1:ir0) ->t1' rac=3 it1 
+ st=928 rt='[t1]+1 ->q' oa p1 oadder 
+ st=929 rt='[q] -> [r(ir1:ir0)]' oq wac=3 newz newn 
+ 	nst=828
+***DECREMENT****
+ st=930 rt='[q]->mdr' oq imdr newz newn
+ st=931 rt='[t5] ->mar' ot5 imar 
+ st=932 rt='[mdr] ->[mar]' write
+ 	nst=828
+**ABS***
+ st=933 rt='[q] ->mdr' oq imdr newz newn
+ st=934 rt='[mdr] ->[mar]' write
+	nst=828
+***index****
+ st=935 rt='[t5]->mar' ot5 imar 
+ st=936 rt='[q] ->mdr' oq imdr newz newn
+ st=937 rt='[mdr] ->[mar]' write
+	nst=828
